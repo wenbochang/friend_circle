@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
 
   validates :email, :password_digest, :token, :presence => true
 
+  def self.find_by_credentials(params)
+    user = User.find_by_email(params[:email])
+    user if user && user.is_password?(params[:password])
+  end
+
   def reset_session_token
     self.token = SecureRandom.urlsafe_base64
     self.save!
@@ -12,18 +17,11 @@ class User < ActiveRecord::Base
   end
 
   def password=(secret)
-    self.password_digest = BCrypt::Password.create(secret)
+    self.password_digest = BCrypt::Password.create(secret) unless secret.blank?
   end
 
   def is_password?(secret)
     BCrypt::Password.new(self.password_digest).is_password?(secret)
-  end
-
-  def find_by_credentials(params)
-    User.find_by_email_and_password_digest(
-      params[:email],
-      params[:password_digest]
-    )
   end
 
   def gen_token

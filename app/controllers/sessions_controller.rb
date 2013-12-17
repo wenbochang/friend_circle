@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     @user = User.find_by_credentials(params[:user])
     if @user
       session[:token] = @user.reset_session_token
-      #redirect
+      redirect_to user_url(@user)
     else
       flash[:errors] = ["Invalid username or password"]
       render :new

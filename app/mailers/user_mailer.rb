@@ -4,12 +4,16 @@ class UserMailer < ActionMailer::Base
 
   def forgot_email(user)
     @user = user
-    # @url = Addressable::URI.new(
-    # :host => "localhost:3000",
-    # :path => "/users/reset_page",
-    # :query_values => {:q => "reset_token"}
-    # ).to_s
-    @url = users_reset_page_url + "?reset_token=#{@user.reset_token}"
+    @url = Addressable::URI.new(
+      :scheme => "http",
+      :host => "localhost:3000",
+      :path => "/users/reset_password_form",
+      :query_values => {
+        :reset_token => @user.reset_token,
+        :user_email => @user.email
+      }
+    ).to_s
+
     mail(to: user.email, subject: 'Forgot Password? Reset Here.')
   end
 end
