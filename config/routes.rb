@@ -8,6 +8,8 @@ SocialThingamajig::Application.routes.draw do
 
   resources :users
 
+  resources :friend_circles
+
   resource :session
 
 

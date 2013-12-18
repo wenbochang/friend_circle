@@ -1,0 +1,6 @@
+<h1>Friend Circle for <%= current_user.email %></h1>
+
+<% @circle.friend_circle_memberships.each do |membership| %>
+	<%= User.find_by_id(membership.user_id).email %>
+	</br>
+<% end %>

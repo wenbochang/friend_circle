@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  def index
+    render :index
+  end
 
   def show
     @user = User.find_by_id(params[:id])
@@ -51,9 +54,13 @@ class UsersController < ApplicationController
 
   def reset_password_form
     session[:reset_token] = params[:reset_token]
-    redirect_to new_session_url unless correct_reset_token?
-    session[:reset_token] = nil
-    render :reset_password_form
+    if correct_reset_token?
+      @user.reset_token = nil
+      session[:reset_token] = nil
+      render :reset_password_form
+    else
+      redirect_to new_session_url
+    end
   end
 
   def get_reset_token_by_email(email)
