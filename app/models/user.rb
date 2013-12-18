@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
 
   validates :email, :password_digest, :token, :presence => true
 
-  has_many :friend_circles, :inverse_of => :user
+  has_many :friend_circles
+  has_many :posts
 
   def self.find_by_credentials(params)
     user = User.find_by_email(params[:email])

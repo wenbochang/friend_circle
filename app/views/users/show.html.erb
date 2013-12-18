@@ -3,3 +3,21 @@
 </h1>
 
 <%= link_to("Add new circle", "/friend_circles/new") %>
+
+
+<h4>Make Post</h4>
+<form action="/posts/post_link" method="POST">
+	<label for="body">Body</label>
+	<input type="text" id="body" name="post[body][body]"></input>
+	</br>
+
+	<label for="link_1">Link1</label>
+	<input type="text" id="link_1" name="post[links][1]"></input>
+	</br>
+
+	<label for="link_2">Link2</label>
+	<input type="text" id="link_2" name="post[links][2]"></input>
+	</br>
+
+	<input type="submit" value="Post Link"></input>
+</form>

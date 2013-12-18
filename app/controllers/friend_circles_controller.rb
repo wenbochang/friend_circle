@@ -18,18 +18,6 @@ class FriendCirclesController < ApplicationController
       flash.now[:errors] = @circle.errors.full_messages
       render :new
     end
-
-
-
-    # memberships = []
-    # params[:circle][:user_ids].each do |member_id|
-    #   memberships << Membership.new(:user_id => member_id)
-    # end
-    #
-    # Circle.transaction do
-    #   @circle.save!
-    #   memberships.each { |m| m.circle_id = @circle_id; m.save! }
-    # end
   end
 
   def show

@@ -7,10 +7,9 @@ SocialThingamajig::Application.routes.draw do
   get "users/reset_password_form", to: "users#reset_password_form"
 
   resources :users
+  post "/posts/post_link", to: "posts#post_link", as: "post_link"
 
   resources :friend_circles
-
-  resource :session
 
 
 end
